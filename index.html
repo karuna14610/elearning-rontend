@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDULEARN</title>
+    
+    <!-- IconScout Icons CDN -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Contact Section */
+        #contact {
+            background: var(--color-bg);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        #contact h2 {
+            margin-bottom: 1rem;
+            color: var(--color-white);
+        }
+
+        #contact p {
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form_group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form_group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--color-white);
+        }
+
+        .form_group input,
+        .form_group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--color-white);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--color-white);
+        }
+
+        .form_group input:focus,
+        .form_group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--color-danger);
+            color: var(--color-white);
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 400ms ease;
+        }
+
+        .btn:hover {
+            background: var(--color-white);
+            color: var(--color-danger);
+        }
+
+        /* Testimonials Section */
+        .testimonials_container {
+            background: var(--color-bg);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .testimonials_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: var(--color-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            color: var(--color-white);
+            transition: transform 0.3s;
+        }
+
+        .testimonial:hover {
+            transform: scale(1.05);
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid var(--color-white);
+            margin-bottom: 1rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #7a4ae25c, #ca76fe);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .faq:hover {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E72);
+        }
+
+        .faq h4 {
+            font-size: 1rem;
+            font-weight: bold;
+            flex-grow: 1;
+            margin: 0;
+        }
+
+        .faq_answer {
+            display: none;
+            margin-top: 0.8rem;
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #1f2641;
+            color: #ffffff;
+            padding: 50px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container.footer_container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 40px;
+        }
+
+        .footer_container > div {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .footer_container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer_1, .footer_2, .footer_3, .footer_4 {
+                flex: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Navigation Bar */
+        nav {
+            width: 100%;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            background: var(--color-bg);
+            z-index: 100;
+            transition: background 0.3s;
+        }
+
+        .nav_container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--color-white);
+        }
+
+        .nav_menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav_menu a {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--color-white);
+            transition: all 400ms ease;
+        }
+
+        .nav_menu a:hover {
+            color: var(--color-danger);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--color-white);
+            background: var(--color-bg-dark);
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container nav_container">
+            <a href="index.html" class="logo"><h1>EDULEARN</h1></a>
+            <ul class="nav_menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#faqs">FAQs</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <header id="home">
+        <div class="container header_container">
+            <div class="header_left">
+                <h1>Unlock Your Potential with Quality Learning</h1>
+                <p>"Education is the passport to the future, for tomorrow belongs to those who prepare for it today." - Malcolm X</p>
+                <a href="#courses" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="header_right">
+                <div class="header_right-image">
+                    <img src="img1.jpg" alt="Learning Illustration">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>At Edulearn, we are dedicated to providing quality education and resources to help you succeed in your learning journey. Our mission is to empower individuals through accessible and engaging online courses that cater to a variety of learning styles and preferences.</p>
+        <p>We believe that education is a lifelong journey, and we strive to create a supportive community where learners can thrive. Our platform offers a diverse range of courses, from technology and business to arts and personal development, ensuring that there is something for everyone.</p>
+        <p>Our team of experienced instructors and industry professionals are committed to delivering high-quality content that is both informative and practical. We understand the importance of flexibility in today’s fast-paced world, which is why our courses are designed to be self-paced, allowing you to learn at your own convenience.</p>
+        <p>Join us at Edulearn and unlock your potential. Whether you are looking to advance your career, explore a new hobby, or gain new skills, we are here to support you every step of the way. Together, let’s make learning an enjoyable and fulfilling experience!</p>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container categories_container">
+            <a href="#" class="category">
+                <div class="category_icon"><i class="uil uil-bitcoin"></i></div>
+                <h3>Blockchain</h3>
+                <p>Learn about decentralized technologies.</p>
+            </a>
+            <a href="#" class="category">
+                <div class="category_icon"><i class="uil uil-palette"></i></div>
+                <h3>Graphic Design</h3>
+                <p>Explore creativity through digital design.</p>
+            </a>
+            <a href="#" class="category">
+                <div class="category_icon"><i class="uil uil-chart-line"></i></div>
+                <h3>Finance</h3>
+                <p>Understand financial strategies and investments.</p>
+            </a>
+            <a href="#" class="category">
+                <div class="category_icon"><i class="uil uil-briefcase"></i></div>
+                <h3>Business</h3>
+                <p>Develop business and entrepreneurial skills.</p>
+            </a>
+            <a href="#" class="category">
+                <div class="category_icon"><i class="uil uil-megaphone"></i></div>
+                <h3>Marketing</h3>
+                <p>Master marketing and advertising strategies.</p>
+            </a>
+            <a href="#" class="category">
+                <div class="category_icon"><i class="uil uil-graduation-cap"></i></div>
+                <h3>Education</h3>
+                <p>Enhance knowledge and learning techniques.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses">
+        <h2>Our Popular Courses</h2>
+        <div class="container courses_container">
+            <article class="course">
+                <div class="course_image">
+                    <img src="img2.jpg" alt="Course Image">
+                </div>
+                <div class="course_info">
+                    <h4><a href="social-media-ui.html">Responsive Social Media Website UI Design</a></h4>
+                    <p>A seamless and engaging social media experience with a fully responsive UI. Designed to adapt across all devices for effortless connectivity.</p>
+                    <a href="social-media-ui.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </article>
+
+            <article class="course">
+                <div class="course_image">
+                    <img src="img3.jpg" alt="Course Image"> 
+                </div>
+                <div class="course_info">
+                    <h4><a href="smarthome-ui.html">Responsive SmartHome Website Design</a></h4>
+                    <p>A modern and intuitive admin dashboard designed for seamless data visualization and efficient management. Fully responsive for a smooth experience across all devices.</p>
+                    <a href="smarthome-ui.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </article>
+
+            <article class="course">
+                <div class="course_image">
+                    <img src="img4.jpg" alt="Course Image"> 
+                </div>
+                <div class="course_info">
+                    <h4><a href="admin-dashboard-ui.html">Responsive Admin Dashboard UI Design</a></h4>
+                    <p>A sleek and responsive admin dashboard built for efficiency and ease of use. Monitor, analyze, and manage data seamlessly across all devices.</p>
+                    <a href="admin-dashboard-ui.html" class="btn btn-primary">Learn More</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faqs">
+        <h2>Frequently Asked Questions</h2>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>What is Edulearn?</h4>
+            </div>
+            <p class="faq_answer">Edulearn is an online learning platform offering courses to help individuals develop skills and knowledge for career growth.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>How do I enroll in a course?</h4>
+            </div>
+            <p class="faq_answer">Click 'Get Started', select a course, and follow the registration steps.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>Are the courses free?</h4>
+            </div>
+            <p class="faq_answer">Some courses are free, while others require payment. Pricing details are available on the course page.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>Can I learn at my own pace?</h4>
+            </div>
+            <p class="faq_answer">Yes, all courses are self-paced, allowing you to learn at your convenience.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>Do I get a certificate after completing a course?</h4>
+            </div>
+            <p class="faq_answer">Yes, a certificate is provided upon successful course completion.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>Is there a community for students?</h4>
+            </div>
+            <p class="faq_answer">Yes, students can join discussion forums and interact with peers.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>Can I ask instructors questions?</h4>
+            </div>
+            <p class="faq_answer">Yes, you can reach out to instructors through the platform via message or forum.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>What payment methods do you accept?</h4>
+            </div>
+            <p class="faq_answer">We accept major credit/debit cards, PayPal, and bank transfers for course payments.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>How can I contact customer support?</h4>
+            </div>
+            <p class="faq_answer">You can contact us through our 'Support' section or email us at support@edulearn.com.</p>
+        </article>
+        <article class="faq">
+            <div class="faq_question">
+                <span class="faq_icon">+</span>
+                <h4>Is Edulearn available worldwide?</h4>
+            </div>
+            <p class="faq_answer">Yes, Edulearn is available to students around the world. Courses can be accessed from anywhere with an internet connection.</p>
+        </article>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="container testimonials_container">
+        <h2>Student Testimonials</h2>
+        <div class="testimonials_grid">
+            <article class="testimonial">
+                <img src="img5.jpg" alt="Diana Ayi">
+                <h5>Diana Ayi</h5>
+                <p>"The courses are well-structured and easy to follow. I learned so much! Highly recommend Edulearn to everyone looking for quality education."</p>
+            </article>
+            <article class="testimonial">
+                <img src="img6.jpg" alt="Ernest Achiever">
+                <h5>Ernest Achiever</h5>
+                <p>"Edulearn has helped me gain confidence in my skills. The interactive content and expert guidance make learning enjoyable."</p>
+            </article>
+            <article class="testimonial">
+                <img src="img7.jpg" alt="Jane Doe">
+                <h5>Jane Doe</h5>
+                <p>"Fantastic learning experience. The interactive content kept me engaged throughout. I feel much more prepared for my career now."</p>
+            </article>
+            <article class="testimonial">
+                <img src="img8.jpg" alt="Edem Quist">
+                <h5>Edem Quist</h5>
+                <p>"The instructors are knowledgeable and supportive. I feel ready to take on new challenges! Thanks to Edulearn, I now have the skills I need."</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need further information, feel free to reach out to us!</p>
+        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbyiEoxPaN1nKEFjCz13Q4mXLCnO4vBgsd7f9taSOJOcZELxXiV5pd7m33RwHij4JwWg/exec" method="POST">
+            <div class="form_group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form_group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form_group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+        <div id="thank-you" style="display: none;">Thank you for your message!</div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer_container">
+            <div class="footer_1">
+                <a href="index.html" class="footer_logo"><h4>EGATOR</h4></a>
+                <p>Welcome to Egator! Your go-to platform for high-quality online courses and skill development. Learn, grow, and succeed with us.</p>
+            </div>
+
+            <div class="footer_2">
+                <h4>Permalinks</h4>
+                <ul class="permalinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer_3">
+                <h4>Privacy</h4>
+                <ul class="privacy">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer_4">
+                <h4>Contact Us</h4>
+                <div>
+                    <p>9471763833</p>
+                    <p>karuna292348@gmail.com</p>
+                </div>
+                <ul class="footer_socials">
+                    <li><a href="#"><i class="uil uil-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="uil uil-instagram-alt"></i></a></li>
+                    <li><a href="#"><i class="uil uil-twitter"></i></a></li>
+                    <li><a href="#"><i class="uil uil-linkedin-alt"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="footer_copyright">
+                <small>Copyright &copy; EGATOR </small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then((response) => response.text())
+            .then((message) => {
+                document.getElementById('thank-you').style.display = 'block';
+                form.reset();
+            })
+            .catch((error) => console.error('Error:', error));
+        });
+
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq').forEach(faq => {
+            faq.addEventListener('click', () => {
+                faq.classList.toggle('active');
+                const answer = faq.querySelector('.faq_answer');
+                if (faq.classList.contains('active')) {
+                    answer.style.display = 'block';
+                } else {
+                    answer.style.display = 'none';
+                }
+            });
+        });
+        // Scroll effect on navigation bar
+        window.addEventListener('scroll', () => {
+            document.querySelector('nav').classList.toggle('window-scroll', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
